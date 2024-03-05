@@ -1,4 +1,4 @@
-package com.chrispbacon.chesschat.Chromium;
+package com.chrispbacon.chesschat.chromium;
 
 import me.friwi.jcefmaven.EnumProgress;
 import me.friwi.jcefmaven.IProgressHandler;

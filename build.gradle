@@ -25,7 +25,22 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation 'me.friwi:jcefmaven:116.0.19.1'
+	implementation 'io.javalin:javalin:4.6.7'
+	implementation 'me.friwi:jcefmaven:105.3.36.2'
+	implementation 'org.java-websocket:Java-WebSocket:1.5.6'
+	implementation 'org.json:json:20180130'
+	// https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+	implementation 'org.eclipse.jetty:jetty-client:9.4.48.v20220622'
+	implementation 'org.eclipse.jetty:jetty-io:9.4.48.v20220622'
+	implementation 'org.eclipse.jetty:jetty-http:9.4.48.v20220622'
+	implementation 'org.eclipse.jetty:jetty-security:9.4.48.v20220622'
+	implementation 'org.eclipse.jetty:jetty-server:9.4.48.v20220622'
+	implementation 'org.eclipse.jetty:jetty-servlet:9.4.48.v20220622'
+	implementation 'org.eclipse.jetty:jetty-util:9.4.48.v20220622'
+	implementation 'org.eclipse.jetty:jetty-util-ajax:9.4.48.v20220622'
+	implementation 'org.eclipse.jetty:jetty-webapp:9.4.48.v20220622'
+	implementation 'org.eclipse.jetty:jetty-xml:9.4.48.v20220622'
+	implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.31'
 }
 
 tasks.named('test') {

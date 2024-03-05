@@ -1,0 +1,427 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+html,
+body {
+  font-family: "Roboto", sans-serif;
+  background: #121212;
+  color: rgb(255, 255, 255, 0.7);
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+
+.sharp-button {
+  background: #018786;
+  border: 1px solid #37323e;
+  font-size: 30px;
+  padding: 5px 10px 5px 10px;
+}
+
+.sharp-button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.main-button {
+  background: #018786;
+  border: 1px solid #37323e;
+  border-radius: 10px;
+  font-size: 30px;
+  padding: 5px 10px 5px 10px;
+}
+
+.main-button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+#jamachi {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#mainpage {
+  cursor: pointer;
+}
+
+#titlebar {
+  font-size: 40px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  justify-content: space-between;
+}
+
+.settings {
+  transition: transform 0.2s ease-in-out;
+}
+
+.align-left {
+  margin: auto 0 auto 0;
+  text-align: left;
+}
+
+.back:hover {
+  transform: scale(1.1);
+}
+
+.home:hover {
+  transform: scale(1.1);
+}
+
+#discord {
+  transition: transform 0.5s ease-in-out;
+}
+
+.showlist {
+  transition: transform 0.5s ease-in-out;
+}
+
+.showlist:hover {
+  color: white;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+#discord:hover {
+  cursor: pointer;
+  transform: scale(1.1) rotate(360deg);
+}
+
+.gear:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.settings:hover {
+  cursor: pointer;
+}
+
+#page-center {
+  padding: 10px;
+  flex: 1;
+}
+
+.bar {
+  margin: 20px 5px 20px 5px;
+  height: auto;
+  justify-content: space-between;
+}
+
+.room {
+  background: #50514f;
+  border-radius: 10px;
+}
+
+.room-detail {
+  padding: 10px 5px 10px 5px;
+}
+
+#roomlist {
+  overflow-y: scroll;
+  padding-right: 10px;
+}
+
+.saas {
+  display: flex;
+  height: 100%;
+}
+
+.main {
+  flex-direction: column;
+}
+
+#page-landing {
+  text-align: center;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+}
+
+.centered {
+  text-align: center;
+}
+
+.expand {
+  width: 100%;
+}
+
+.gap {
+  gap: 10px;
+}
+
+.center {
+  margin: auto;
+}
+
+.block {
+  display: block;
+}
+
+.flex {
+  display: flex;
+}
+
+.mini-margin {
+  margin: 3px;
+}
+
+.add-margin {
+  margin-bottom: 10px;
+}
+
+.shrink {
+  height: 35px;
+}
+
+.fix {
+  font-size: 24px;
+  height: 32px;
+}
+
+.shrink-font {
+  font-size: 20px;
+}
+
+.volume {
+  padding: 10px 10px 5px 10px;
+}
+
+.selectable {
+  cursor: pointer;
+}
+
+#nowplaying {
+  font-style: italic;
+  font-size: 20px;
+}
+
+.percent-70 {
+  width: 70%;
+}
+
+.chat-container {
+  flex: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  min-height: 2rem;
+}
+
+.m-t-a {
+  margin-top: auto;
+}
+
+.msg-user {
+  color: #79b4a9;
+}
+
+.messagebox {
+  margin-bottom: 5px;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.userlist {
+  margin-bottom: 5px;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.titlebar-fix {
+  margin: auto;
+  display: flex;
+}
+
+.userlist-pad {
+  padding: 5px;
+}
+
+.chat-pad {
+  padding-left: 5px;
+}
+
+.chat {
+  border-left: 1px solid #fcf7ff;
+  width: 100%;
+  text-align: left;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.hide-overflow {
+  overflow-y: hidden;
+}
+
+.chat-parent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.chat-spacer {
+  border-bottom: 1px solid #fcf7ff;
+}
+
+.chat-sidebar {
+  min-width: 250px;
+  width: 250px;
+}
+
+.auto {
+  margin: auto;
+}
+
+.auto-top-bottom {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.sidebar-element {
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+
+.consume {
+  height: 100%;
+}
+
+.left {
+  margin-left: 0px;
+}
+
+.center-me {
+  align-items: center;
+  height: 38px;
+}
+
+.cp {
+  margin: 3px;
+}
+
+.scroll-left {
+  margin: 5px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+}
+
+.scroll-left p {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+  transform: translateX(100%);
+  animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+.disabled {
+  color: gray;
+}
+
+.disabled:hover {
+  cursor: not-allowed;
+  transform: none;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  font-size: 13px;
+  padding: 12px 20px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.radius {
+  border-radius: 10px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(69, 74, 77);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+input[type="text"] {
+  background: rgb(255, 255, 255, 0.2);
+  color: rgb(255, 255, 255, 0.7);
+  border-radius: 10px;
+  outline-width: 0;
+  border: none;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  border-radius: 100px;
+  background: rgb(255, 255, 255, 0.2);
+  height: 0.5rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: -4px;
+  background-color: #018786;
+  border-radius: 100px;
+  height: 1rem;
+  width: 1rem;
+}
+
+.host {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
+}

@@ -1,4 +1,4 @@
-package com.chrispbacon.chesschat.Chromium;
+package com.chrispbacon.chesschat.chromium;
 
 import lombok.Getter;
 import me.friwi.jcefmaven.*;
