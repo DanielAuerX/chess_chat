@@ -4,19 +4,20 @@ window.onload = function () {
   configure("idle");
 
   let senders = document.getElementsByClassName("sender");
-  for (let i = 0; i < senders.length; i++) {
-    let sender = senders[i];
-    sender.addEventListener("keyup", function (event) {
-      event.preventDefault();
-      if (event.keyCode === 13) {
-        console.log(sender.value);
-        message(sender.value);
-        sender.value = "";
-      }
-    });
+    for (let i = 0; i < senders.length; i++) {
+      let sender = senders[i];
+      sender.addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+          console.log(sender.value);
+          message(sender.value);
+          sender.value = "";
+        }
+      });
+    }
 
   document.getElementById("discord").addEventListener("click", function () {
-    openURL("https://discord.gg/G56HbBfk");
+      window.open("https://discord.gg/G56HbBfk", "_blank");
   });
 
   fetch(origin + "v1/config/websocket")
@@ -136,12 +137,6 @@ window.onload = function () {
     copyToClipboard(document.getElementById("party").innerHTML);
   });
 
-  document.getElementById("invite").addEventListener("click", function () {
-    copyToClipboard(
-      "https://jamalo.ng/" + document.getElementById("party").innerHTML
-    );
-  });
-
   document.getElementById("select-host").addEventListener("click", function () {
     configure("host");
     host();
@@ -168,6 +163,7 @@ function openLandingPage() {
       options[i].classList.remove("disabled");
     }
   }
+ }
 
 function configure(current) {
   document.getElementById("jamachi").dataset.status = current;

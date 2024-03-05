@@ -92,7 +92,7 @@ public class Jamachi {
 	//	JPanel style = new JPanel(new BorderLayout(5, 0));
 	//	style.setBackground(base);
 	//	style.add(logo, BorderLayout.WEST);
-	//	SmoothLabel label = new SmoothLabel("JamAlong " + application.getVersion());
+	//	SmoothLabel label = new SmoothLabel(" " + application.getVersion());
 	//	label.setFont(new Font("Dialog", Font.BOLD, 18));
 	//	label.setForeground(new Color(180, 180, 180));
 	//	style.add(label, BorderLayout.CENTER);
