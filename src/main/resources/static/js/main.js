@@ -100,10 +100,11 @@ function onMessageReceived(payload) {
         messageElement.appendChild(usernameElement);
     }
 
-    var textElement = document.createElement('p');
+    var textElement = document.createElement('div');
+    textElement.style.whiteSpace = 'pre-line'; // or 'pre'
     var messageText = document.createTextNode(message.content);
-    textElement.appendChild(messageText);
 
+    textElement.appendChild(messageText);
     messageElement.appendChild(textElement);
 
     messageArea.appendChild(messageElement);

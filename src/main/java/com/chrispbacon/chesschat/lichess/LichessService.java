@@ -78,15 +78,15 @@ public class LichessService {
         final String profileUrl = jsonObject.get("url").getAsString();
         return """
             LiChess Stats for %s:
-            Blitz
-                Games:  %s
-                Rating: %s
-            Bullet
-                Games:  %s
-                Rating: %s
-            Rapid
-                Games:  %s
-                Rating: %s
+            + Blitz
+            --- Games:  %s
+            --- Rating: %s
+            + Bullet
+            --- Games:  %s
+            --- Rating: %s
+            + Rapid
+            --- Games:  %s
+            --- Rating: %s
             Profile URL: %s
             """.formatted(username, blitzGames, blitzRating, bulletGames, bulletRating, rapidGames, rapidRating, profileUrl);
     }
