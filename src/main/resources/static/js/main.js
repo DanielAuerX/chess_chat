@@ -19,6 +19,11 @@ var colors = [
 function connect(event) {
     username = document.querySelector('#name').value.trim();
 
+    if(username.length > 16) {
+        alert("Username must be 16 characters or less.");
+        return;
+    }
+
     if(username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
@@ -30,6 +35,7 @@ function connect(event) {
     }
     event.preventDefault();
 }
+
 
 
 function onConnected() {

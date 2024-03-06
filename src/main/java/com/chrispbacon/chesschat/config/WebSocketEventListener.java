@@ -37,7 +37,7 @@ public class WebSocketEventListener {
     }
 
     @EventListener
-    public void handleWebSocketDisconnect(SessionConnectEvent event) {
+    public void handleWebSocketConnect(SessionConnectEvent event) {
         // todo username is currently null. create user list?
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
         String username = (String) headerAccessor.getSessionAttributes().get("username");
