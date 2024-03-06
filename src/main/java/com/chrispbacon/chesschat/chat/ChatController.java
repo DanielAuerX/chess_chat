@@ -25,6 +25,7 @@ public class ChatController {
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         if (lichessService.shouldDisplayStats(chatMessage)){
             log.info("stats have been requested by {}", chatMessage.getSender());
+            return lichessService.requestStats(chatMessage);
         }
         return chatMessage;
     }

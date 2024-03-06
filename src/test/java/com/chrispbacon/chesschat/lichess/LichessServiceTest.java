@@ -17,4 +17,11 @@ class LichessServiceTest {
 
         assertTrue(result);
     }
+
+    @Test
+    void name() {
+        final String STATS_PREFIX = "$stats ";
+        String lichessUsername = "$stats timo".substring(STATS_PREFIX.length());
+        assertEquals("timo", lichessUsername);
+    }
 }
