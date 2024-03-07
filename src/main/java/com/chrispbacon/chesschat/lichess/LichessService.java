@@ -18,8 +18,8 @@ import org.springframework.web.client.RestTemplate;
 public class LichessService {
 
     private final String STATS_PREFIX = "$stats ";
+    private final String CHALLENGE_PREFIX = "$challenge ";
     private final String USER_STATS_URL = "https://lichess.org/api/user/";
-
     private final String SENDER = "LiChess Bot";
 
     private static final Logger log = LoggerFactory.getLogger(LichessService.class);
@@ -89,5 +89,25 @@ public class LichessService {
             --- Rating: %s
             Profile URL: %s
             """.formatted(username, blitzGames, blitzRating, bulletGames, bulletRating, rapidGames, rapidRating, profileUrl);
+    }
+
+    public boolean shouldChallenge(final ChatMessage chatMessage) {
+        return chatMessage.getContent().startsWith(CHALLENGE_PREFIX);
+    }
+
+    public ChatMessage challenge(ChatMessage chatMessage) {
+        String lichessUsername = chatMessage.getContent().substring(CHALLENGE_PREFIX.length());
+        ResponseEntity<String> responseEntity;
+        try {
+            responseEntity = restTemplate.getForEntity(USER_STATS_URL + lichessUsername, String.class);
+        } catch (RestClientException e) {
+            log.error("Error while requesting the LiChess stats", e);
+            String errorMessage = "The username " + lichessUsername + " does not exist!";
+            return new ChatMessage(errorMessage, SENDER, MessageType.CHAT);
+        }
+        if (responseEntity.getStatusCode().is2xxSuccessful()) {
+            return new ChatMessage(lichessUsername, SENDER, MessageType.LINK);
+        }
+        return chatMessage;
     }
 }
