@@ -1,6 +1,5 @@
 package com.chrispbacon.chesschat.chat;
 
-import com.chrispbacon.chesschat.config.WebSocketEventListener;
 import com.chrispbacon.chesschat.lichess.LichessService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +17,11 @@ public class ChatController {
 
     private static final Logger log = LoggerFactory.getLogger(ChatController.class);
     private final LichessService lichessService;
+    private final ActiveUserService activeUserService;
 
-    public ChatController(LichessService lichessService) {
+    public ChatController(LichessService lichessService, ActiveUserService activeUserService) {
         this.lichessService = lichessService;
+        this.activeUserService = activeUserService;
     }
 
     @MessageMapping("/chat.sendMessage")
@@ -42,6 +43,7 @@ public class ChatController {
     public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         // add username in web socket session
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        activeUserService.addUser(chatMessage.getSender());
         return chatMessage;
     }
 }

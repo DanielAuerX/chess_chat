@@ -38,8 +38,8 @@ function connect(event) {
 
 
 function onConnected() {
-    // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public', onMessageReceived);
+    stompClient.subscribe('/topic/public', onMessageReceived);    // subscribe to the public topic
+    stompClient.subscribe('/topic/userlist', onUserListReceived); // subscribe to user list updates
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
@@ -72,6 +72,22 @@ function sendMessage(event) {
         messageInput.value = '';
     }
     event.preventDefault();
+}
+
+function onUserListReceived(payload) {
+    // handle the received user list and update ui
+    var userList = JSON.parse(payload.body);
+
+    // Clear the existing user list UI
+    var userListElement = document.querySelector('#userList');
+    userListElement.innerHTML = '';
+
+    // Update your user list UI with the received users array
+    userList.forEach(function (user) {
+        var userItem = document.createElement('li');
+        userItem.textContent = user;
+        userListElement.appendChild(userItem);
+    });
 }
 
 
