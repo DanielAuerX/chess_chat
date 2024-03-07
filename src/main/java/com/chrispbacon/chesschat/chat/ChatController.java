@@ -30,6 +30,10 @@ public class ChatController {
             log.info("stats have been requested by {}", chatMessage.getSender());
             return lichessService.requestStats(chatMessage);
         }
+        if (lichessService.shouldChallenge(chatMessage)){
+            log.info("a challenge has been requested by {}", chatMessage.getSender());
+            return lichessService.challenge(chatMessage);
+        }
         return chatMessage;
     }
 

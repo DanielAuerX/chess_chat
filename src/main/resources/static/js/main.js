@@ -19,12 +19,12 @@ var colors = [
 function connect(event) {
     username = document.querySelector('#name').value.trim();
 
-    if(username.length > 16) {
+    if (username.length > 16) {
         alert("Username must be 16 characters or less.");
         return;
     }
 
-    if(username) {
+    if (username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
@@ -35,7 +35,6 @@ function connect(event) {
     }
     event.preventDefault();
 }
-
 
 
 function onConnected() {
@@ -63,7 +62,7 @@ function onError(error) {
 
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
-    if(messageContent && stompClient) {
+    if (messageContent && stompClient) {
         var chatMessage = {
             sender: username,
             content: messageInput.value,
@@ -81,7 +80,7 @@ function onMessageReceived(payload) {
 
     var messageElement = document.createElement('li');
 
-    if(message.type === 'JOIN') {
+    if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
     } else if (message.type === 'LEAVE') {
@@ -102,13 +101,23 @@ function onMessageReceived(payload) {
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);
     }
+    if (message.type === 'LINK') {
+        var textElement = document.createElement('div');
+        var linkElement = document.createElement('a');
+        linkElement.href = 'https://lichess.org/?user=' + message.content + '#friend';
+        linkElement.target = '_blank';  // open the link in a new tab
+        linkElement.textContent = 'Click here here to challenge ' + message.content;
 
-    var textElement = document.createElement('div');
-    textElement.style.whiteSpace = 'pre-line'; // or 'pre'
-    var messageText = document.createTextNode(message.content);
+        textElement.appendChild(linkElement)
+        messageElement.appendChild(textElement);
+    } else {
+        var textElement = document.createElement('div');
+        textElement.style.whiteSpace = 'pre-line'; // or 'pre'
+        var messageText = document.createTextNode(message.content);
 
-    textElement.appendChild(messageText);
-    messageElement.appendChild(textElement);
+        textElement.appendChild(messageText);
+        messageElement.appendChild(textElement);
+    }
 
     messageArea.appendChild(messageElement);
     messageArea.scrollTop = messageArea.scrollHeight;
