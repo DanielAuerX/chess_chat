@@ -285,3 +285,37 @@ button.accent {
         font-size: 1.1em;
     }
 }
+
+#userListPanel {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    color: #333;
+        background-color: #fff;
+        box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+        border-radius: 2px;
+        width: 100%;
+        max-width: 300px;
+margin-top: 20px;
+    vertical-align: middle;
+    position: absolute;
+    top: 1%;
+    left: 0;
+    margin-left: 20px;
+    padding: 20px;
+    min-height: 250px;
+}
+
+#userListPanel h3 {
+    color: #6db33f;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    margin-top: 1px;
+}
+
+#userList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    max-height: 200px;
+}
