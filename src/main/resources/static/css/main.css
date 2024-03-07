@@ -239,6 +239,19 @@ button.accent {
     width: 100%;
 }
 
+.margin-bottom {
+    margin-bottom: 12px;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0px!important;
+}
+
+.info-text {
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
 
 @media screen and (max-width: 730px) {
 
