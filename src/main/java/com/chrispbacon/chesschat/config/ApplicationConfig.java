@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
@@ -22,7 +23,11 @@ public class ApplicationConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplate();
+        int timeout = 5000;
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(timeout);
+        requestFactory.setReadTimeout(timeout);
+        return new RestTemplate(requestFactory);
     }
 
     @Bean
