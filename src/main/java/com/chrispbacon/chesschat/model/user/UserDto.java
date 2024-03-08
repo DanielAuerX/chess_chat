@@ -2,8 +2,6 @@ package com.chrispbacon.chesschat.model.user;
 
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 public class UserDto {
 

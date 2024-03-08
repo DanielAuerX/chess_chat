@@ -26,7 +26,6 @@ public class AuthenticationController {
 
 	private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
 
-
 	private final JwtService jwtService;
 
 	@PostMapping("/register")

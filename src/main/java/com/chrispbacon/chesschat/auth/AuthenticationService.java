@@ -21,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.UUID;
 
 @Service
@@ -32,8 +31,8 @@ public class AuthenticationService {
 	private final PasswordEncoder passwordEncoder;
 	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
-	private static final Logger log = LoggerFactory.getLogger(AuthenticationService.class);
 
+	private static final Logger log = LoggerFactory.getLogger(AuthenticationService.class);
 
 	public AuthenticationResponse register(RegisterRequest request) {
 		log.info("REGISTER: Username: " + request.getUserName());
