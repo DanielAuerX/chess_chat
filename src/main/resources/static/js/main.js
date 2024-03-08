@@ -49,6 +49,13 @@ function onConnected() {
     )
 
     connectingElement.classList.add('hidden');
+<<<<<<< Updated upstream
+=======
+
+    // toggle user list panel visibility
+    var userListPanel = document.getElementById('userListPanel');
+    userListPanel.classList.remove('hidden');
+>>>>>>> Stashed changes
 }
 
 

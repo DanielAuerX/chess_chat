@@ -8,7 +8,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -28,10 +27,17 @@ public class SecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
-				.csrf(AbstractHttpConfigurer::disable)
+				.csrf((csrf) -> csrf.disable())
 				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers("/home/**").permitAll()
-						.anyRequest().permitAll()
+						.requestMatchers("/login").permitAll()
+						.requestMatchers("/home").authenticated()
+						.requestMatchers("/register").permitAll()
+						.requestMatchers("/css/**").permitAll()
+						.requestMatchers("/js/**").permitAll()
+						.requestMatchers("login.html").permitAll()
+						.requestMatchers("index.html").permitAll()
+						.requestMatchers("register.html").permitAll()
+						.anyRequest().authenticated()
 				)
 
 				.rememberMe(Customizer.withDefaults())
