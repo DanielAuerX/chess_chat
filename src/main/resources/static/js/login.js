@@ -20,6 +20,7 @@ form.addEventListener('submit', function (e) {
         console.log(data);
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem('refresh_token', data.refresh_token);
+        localStorage.setItem('userName', data.user.userName);
         document.cookie = `Authorization=${data.access_token}`
       });
     } else {

@@ -125,3 +125,16 @@ function getAvatarColor(messageSender) {
 
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)
+
+window.onload = () => {
+    if (document.cookie.startsWith('Authorization')) {
+        username = localStorage.getItem('userName');
+        usernamePage.classList.add('hidden');
+        chatPage.classList.remove('hidden');
+
+        var socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, onConnected, onError);
+    }
+}
