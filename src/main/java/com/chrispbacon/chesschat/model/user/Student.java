@@ -28,8 +28,6 @@ public class Student implements UserDetails {
 	private String firstName;
 	private String lastName;
 	private Role role;
-	@ElementCollection
-	private List<Long> finishedCategories;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

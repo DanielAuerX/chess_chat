@@ -12,7 +12,6 @@ public class UserDto {
 	private final String firstName;
 	private final String lastName;
 	private final Role role;
-	private final List<Long> finishedCategories;
 
 	public UserDto(Student student) {
 		this.email = student.getEmail();
@@ -20,6 +19,5 @@ public class UserDto {
 		this.firstName = student.getFirstName();
 		this.lastName = student.getLastName();
 		this.role = student.getRole();
-		this.finishedCategories = student.getFinishedCategories();
 	}
 }

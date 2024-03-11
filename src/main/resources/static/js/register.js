@@ -25,7 +25,7 @@ form.addEventListener('submit', function (e) {
     method: 'POST',
     body: JSON.stringify({
       email: email.value,
-      username: username.value,
+      userName: username.value,
       password: password.value,
     })
   }).then(response => {

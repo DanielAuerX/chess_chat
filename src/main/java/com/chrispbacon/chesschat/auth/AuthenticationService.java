@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,17 +32,17 @@ public class AuthenticationService {
 	private final PasswordEncoder passwordEncoder;
 	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
+	private static final Logger log = LoggerFactory.getLogger(AuthenticationService.class);
+
 
 	public AuthenticationResponse register(RegisterRequest request) {
+		log.info("REGISTER: Username: " + request.getUserName());
 		var user = Student.builder()
 				.id(UUID.randomUUID())
-				.firstName(request.getFirstName())
-				.lastName(request.getLastName())
 				.userName(request.getUserName())
 				.email(request.getEmail())
 				.password(passwordEncoder.encode(request.getPassword()))
 				.role(Role.USER)
-				.finishedCategories(new ArrayList<>())
 				.build();
 		var savedUser = userRepository.save(user);
 		var jwtToken = jwtService.generateToken(user);
@@ -58,14 +60,20 @@ public class AuthenticationService {
 	}
 
 	public AuthenticationResponse authenticate(AuthenticationRequest request) {
+		log.info("Trying to find user in h2 database");
+		log.info(request.getUserName());
+		log.info(request.getPassword());
+
 		authenticationManager.authenticate( //compares hashed db pw with hashed provided pw; BadCredentialsException handled
 				new UsernamePasswordAuthenticationToken(
 						request.getUserName(),
 						request.getPassword()
 				)
 		);
+		System.out.println("Line 75");
 		var user = userRepository.findByUserName(request.getUserName())
 				.orElseThrow();
+		log.info(user.toString());
 		var jwtToken = jwtService.generateToken(user);
 		var refreshToken = jwtService.generateRefreshToken(user);
 		revokeAllUserTokens(user);
