@@ -33,7 +33,6 @@ public class AuthenticationController {
 	public ResponseEntity<Object> register(
 			@RequestBody RegisterRequest request
 	) {
-		log.info("Register endpoint talked to");
 		if (authenticationService.checkIfEmailExists(request)) {
 			return ResponseEntity.status(409).body("Email already exists!");
 		}
@@ -47,7 +46,6 @@ public class AuthenticationController {
 	public ResponseEntity<AuthenticationResponse> authenticate(
 			@RequestBody AuthenticationRequest request
 	) {
-		log.info("Authenticate endpoint talked to");
 		return ResponseEntity.ok(authenticationService.authenticate(request));
 	}
 
