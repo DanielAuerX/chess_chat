@@ -32,14 +32,12 @@ form.addEventListener('submit', function (e) {
     if (response.ok) {
       response.json().then(data => {
         console.log(data);
-        alert(data.message);
-        window.location.href = '/login';
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+        document.cookie = `Authorization=${btoa(data.access_token)}`
       });
     } else {
-      response.json().then(data => {
-        console.log(data);
-        alert(data.message);
-      });
+      alert("Something went wrong!");
     }
   });
 });
