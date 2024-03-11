@@ -39,11 +39,7 @@ public class SecurityConfiguration {
 						.requestMatchers("index.html").authenticated()
 						.requestMatchers("/css/**").permitAll()
 						.requestMatchers("/js/**").permitAll()
-						//.requestMatchers("/h2-console").permitAll()
-						//.requestMatchers("/h2-console/**").permitAll()
-						//.requestMatchers("/auth/**").permitAll()
 						.requestMatchers("stylesheet.css").permitAll()
-
 						.anyRequest().authenticated()
 				)
 
