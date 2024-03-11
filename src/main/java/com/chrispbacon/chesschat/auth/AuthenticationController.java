@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/tempauth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 @CrossOrigin
 public class AuthenticationController {
