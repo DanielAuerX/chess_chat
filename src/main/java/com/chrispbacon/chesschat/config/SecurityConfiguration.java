@@ -36,6 +36,7 @@ public class SecurityConfiguration {
 						.requestMatchers("/js/**").permitAll()
 						.requestMatchers("login.html").permitAll()
 						.requestMatchers("register.html").permitAll()
+						.requestMatchers("/auth/**").permitAll()
 						.requestMatchers("index.html").authenticated()
 						.anyRequest().authenticated()
 				)

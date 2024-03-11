@@ -5,13 +5,7 @@ const password = document.getElementById('password');
 form.addEventListener('submit', function (e) {
   e.preventDefault();
 
-
-  if (password.value !== passwordRepeat.value) {
-    alert('Passwords do not match');
-    return;
-  }
-
-  fetch('/authenticate', {
+  fetch('/auth/authenticate', {
     headers: {
       'Content-Type': 'application/json'
     },
