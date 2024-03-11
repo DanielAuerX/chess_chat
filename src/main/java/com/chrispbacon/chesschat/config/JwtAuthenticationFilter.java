@@ -3,6 +3,7 @@ package com.chrispbacon.chesschat.config;
 import com.chrispbacon.chesschat.repository.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -33,6 +37,36 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	) throws ServletException, IOException {
 		if (request.getServletPath().contains("/login") || (request.getServletPath().contains("/css"))) {
 			filterChain.doFilter(request, response);
+			return;
+		}
+		if (request.getCookies() != null){
+			Optional<Cookie> optionalAuthCookie = Arrays.stream(request.getCookies()).filter(cookie -> Objects.equals(cookie.getName(), "Authorization")).findFirst();
+			logger.info("COOKIE IST VORHANDEN");
+			if (optionalAuthCookie.isPresent()) {
+				final Cookie authCookie = optionalAuthCookie.get();
+				final String jwt = authCookie.getValue();
+				final String userName;
+				userName = jwtService.extractUsername(jwt);
+				if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+					UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
+					var isTokenValid = tokenRepository.findByToken(jwt)
+							.map(t -> !t.isExpired() && !t.isRevoked())
+							.orElse(false);
+					if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
+						UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+								userDetails,
+								null,
+								userDetails.getAuthorities()
+						);
+						authToken.setDetails(
+								new WebAuthenticationDetailsSource().buildDetails(request)
+						);
+						SecurityContextHolder.getContext().setAuthentication(authToken);
+					}
+				}
+				filterChain.doFilter(request, response);
+			}
+
 			return;
 		}
 		final String authHeader = request.getHeader("Authorization");
