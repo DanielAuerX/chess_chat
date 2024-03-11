@@ -32,14 +32,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			@NonNull FilterChain filterChain
 	) throws ServletException, IOException {
 		if (request.getServletPath().contains("/login") || (request.getServletPath().contains("/css"))) {
-			logger.info("doing something lol");
-			logger.info(request.getServletPath());
 			filterChain.doFilter(request, response);
 			return;
 		}
-		logger.info("doing something else lol");
-		logger.info(request.getServletPath());
-
 		final String authHeader = request.getHeader("Authorization");
 		final String jwt;
 		final String userName;
