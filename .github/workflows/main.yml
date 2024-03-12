@@ -16,10 +16,11 @@ jobs:
 
     steps:
     - name: checkout code
-      uses: actions/checkout@v3
-
-    - name: switch to main branch
-      run: git checkout main
+      uses: actions/checkout@v4
+      with:
+        # super-linter needs the full git history to get the
+        # list of files that changed across commits
+        fetch-depth: 0
 
     - name: set up java
       uses: actions/setup-java@v3
