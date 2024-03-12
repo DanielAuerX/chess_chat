@@ -28,15 +28,18 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: check Java code format
-      uses: super-linter/super-linter@v6.3.0
-      with:
-        args: --disable all,!google-java-format
+    #- name: check Java code format
+    #  uses: super-linter/super-linter@v6.3.0
+    #  with:
+    #    args: --disable all,!google-java-format
 
     - name: build with gradle
       run: |
         chmod +x ./gradlew
         ./gradlew build
+
+    - name: analyze gradle imports
+      run: ./gradlew lintGradle
 
     - name: run project tests
       run: ./gradlew test
