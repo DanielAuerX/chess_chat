@@ -1,16 +1,15 @@
 package com.chrispbacon.chesschat.model.user;
 
-import com.chrispbacon.chesschat.model.Permission;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import static com.chrispbacon.chesschat.model.Permission.*;
 
+import com.chrispbacon.chesschat.model.Permission;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static com.chrispbacon.chesschat.model.Permission.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @RequiredArgsConstructor
 public enum Role {

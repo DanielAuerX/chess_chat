@@ -1,10 +1,10 @@
 package com.chrispbacon.chesschat.lichess;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.chrispbacon.chesschat.chat.ChatMessage;
 import com.chrispbacon.chesschat.chat.MessageType;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class LichessServiceTest {
 

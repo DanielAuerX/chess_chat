@@ -1,9 +1,7 @@
 package com.chrispbacon.chesschat.lichess;
 
-import com.chrispbacon.chesschat.chat.ChatController;
 import com.chrispbacon.chesschat.chat.ChatMessage;
 import com.chrispbacon.chesschat.chat.MessageType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.slf4j.Logger;

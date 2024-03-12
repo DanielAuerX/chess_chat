@@ -1,7 +1,6 @@
 package com.chrispbacon.chesschat.chat;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 

@@ -1,11 +1,9 @@
 package com.chrispbacon.chesschat.chat;
 
-import com.chrispbacon.chesschat.config.WebSocketConfig;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.stereotype.Component;
-
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Component;
 
 @Component
 public class ActiveUserService {

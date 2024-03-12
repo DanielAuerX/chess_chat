@@ -1,10 +1,9 @@
 package com.chrispbacon.chesschat.repository;
 
+import com.chrispbacon.chesschat.model.token.Token;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import com.chrispbacon.chesschat.model.token.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

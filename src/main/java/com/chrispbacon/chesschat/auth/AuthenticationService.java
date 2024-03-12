@@ -11,6 +11,8 @@ import com.chrispbacon.chesschat.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +21,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -66,7 +65,7 @@ public class AuthenticationService {
 
     authenticationManager
         .authenticate( // compares hashed db pw with hashed provided pw; BadCredentialsException
-                       // handled
+            // handled
             new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword()));
     System.out.println("Line 75");
     var user = userRepository.findByUserName(request.getUserName()).orElseThrow();

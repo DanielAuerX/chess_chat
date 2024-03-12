@@ -17,13 +17,9 @@ jobs:
     steps:
     - name: checkout code
       uses: actions/checkout@v4
-      with:
-        # super-linter needs the full git history to get the
-        # list of files that changed across commits
-        fetch-depth: 0
 
     - name: set up java
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
@@ -33,13 +29,16 @@ jobs:
     #  with:
     #    args: --disable all,!google-java-format
 
+    - name: verifying java format
+      run: ./gradlew spotlessApply
+
     - name: build with gradle
       run: |
         chmod +x ./gradlew
         ./gradlew build -x test
 
-    - name: analyze gradle imports
+    - name: checking for unused imports
       run: ./gradlew lintGradle
 
-    - name: run project tests
+    - name: run tests
       run: ./gradlew test
