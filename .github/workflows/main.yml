@@ -24,6 +24,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: check Java code format
+      uses: super-linter/super-linter@v6.3.0
+
     - name: build with gradle
       run: |
         chmod +x ./gradlew
