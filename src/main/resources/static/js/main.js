@@ -48,12 +48,10 @@ function onConnected() {
     )
 
     connectingElement.classList.add('hidden');
-
         // toggle user list panel visibility
         var userListPanel = document.getElementById('userListPanel');
         userListPanel.classList.remove('hidden');
 }
-
 
 function onError(error) {
     connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
@@ -152,3 +150,16 @@ function getAvatarColor(messageSender) {
 
 usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', sendMessage, true)
+
+window.onload = () => {
+    if (document.cookie.startsWith('Authorization')) {
+        username = localStorage.getItem('userName');
+        usernamePage.classList.add('hidden');
+        chatPage.classList.remove('hidden');
+
+        var socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, onConnected, onError);
+    }
+}
