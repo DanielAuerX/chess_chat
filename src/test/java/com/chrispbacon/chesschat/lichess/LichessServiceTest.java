@@ -8,20 +8,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LichessServiceTest {
 
-    @Test
-    void shouldDisplayStats() {
-        ChatMessage chatMessage = new ChatMessage("$stats timo", "peter", MessageType.CHAT);
-        LichessService lichessService = new LichessService(null);
+  @Test
+  void shouldDisplayStats() {
+    ChatMessage chatMessage = new ChatMessage("$stats timo", "peter", MessageType.CHAT);
+    LichessService lichessService = new LichessService(null);
 
-        boolean result = lichessService.shouldDisplayStats(chatMessage);
+    boolean result = lichessService.shouldDisplayStats(chatMessage);
 
-        assertTrue(result);
-    }
+    assertTrue(result);
+  }
 
-    @Test
-    void name() {
-        final String STATS_PREFIX = "$stats ";
-        String lichessUsername = "$stats timo".substring(STATS_PREFIX.length());
-        assertEquals("timo", lichessUsername);
-    }
+  @Test
+  void name() {
+    final String STATS_PREFIX = "$stats ";
+    String lichessUsername = "$stats timo".substring(STATS_PREFIX.length());
+    assertEquals("timo", lichessUsername);
+  }
 }

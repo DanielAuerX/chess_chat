@@ -16,41 +16,36 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 @Component
 public class WebSocketEventListener {
 
-    private static final Logger log = LoggerFactory.getLogger(WebSocketEventListener.class);
-    private final SimpMessageSendingOperations messagingTemplate;
-    private final ActiveUserService activeUserService;
+  private static final Logger log = LoggerFactory.getLogger(WebSocketEventListener.class);
+  private final SimpMessageSendingOperations messagingTemplate;
+  private final ActiveUserService activeUserService;
 
-    public WebSocketEventListener(SimpMessageSendingOperations messagingTemplate, ActiveUserService activeUserService) {
-        this.messagingTemplate = messagingTemplate;
-        this.activeUserService = activeUserService;
-    }
+  public WebSocketEventListener(
+      SimpMessageSendingOperations messagingTemplate, ActiveUserService activeUserService) {
+    this.messagingTemplate = messagingTemplate;
+    this.activeUserService = activeUserService;
+  }
 
-    @EventListener
-    public void handleWebSocketDisconnect(SessionDisconnectEvent event) {
-        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-        String username = (String) headerAccessor.getSessionAttributes().get("username");
-        if (username != null) {
-            log.info("user disconnected: {}", username);
-            var chatMessage = ChatMessage.builder()
-                    .type(MessageType.LEAVE)
-                    .sender(username)
-                    .build();
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
-            activeUserService.removeUser(username);
-        }
+  @EventListener
+  public void handleWebSocketDisconnect(SessionDisconnectEvent event) {
+    StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+    String username = (String) headerAccessor.getSessionAttributes().get("username");
+    if (username != null) {
+      log.info("user disconnected: {}", username);
+      var chatMessage = ChatMessage.builder().type(MessageType.LEAVE).sender(username).build();
+      messagingTemplate.convertAndSend("/topic/public", chatMessage);
+      activeUserService.removeUser(username);
     }
+  }
 
-    @EventListener
-    public void handleWebSocketConnect(SessionConnectEvent event) {
-        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-        String username = (String) headerAccessor.getSessionAttributes().get("username");
-        if (username != null) {
-            log.info("user connected: {}", username);
-            var chatMessage = ChatMessage.builder()
-                    .type(MessageType.JOIN)
-                    .sender(username)
-                    .build();
-            messagingTemplate.convertAndSend("/topic/public", chatMessage);
-        }
+  @EventListener
+  public void handleWebSocketConnect(SessionConnectEvent event) {
+    StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+    String username = (String) headerAccessor.getSessionAttributes().get("username");
+    if (username != null) {
+      log.info("user connected: {}", username);
+      var chatMessage = ChatMessage.builder().type(MessageType.JOIN).sender(username).build();
+      messagingTemplate.convertAndSend("/topic/public", chatMessage);
     }
+  }
 }

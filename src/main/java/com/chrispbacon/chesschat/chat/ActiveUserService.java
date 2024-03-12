@@ -10,29 +10,28 @@ import java.util.Set;
 @Component
 public class ActiveUserService {
 
-    private final Set<String> activeUsers = new HashSet<>();
-    private final SimpMessagingTemplate messagingTemplate;
+  private final Set<String> activeUsers = new HashSet<>();
+  private final SimpMessagingTemplate messagingTemplate;
 
-    public ActiveUserService(SimpMessagingTemplate messagingTemplate) {
-        this.messagingTemplate = messagingTemplate;
-    }
+  public ActiveUserService(SimpMessagingTemplate messagingTemplate) {
+    this.messagingTemplate = messagingTemplate;
+  }
 
-    public Set<String> getActiveUsers() {
-        return activeUsers;
-    }
+  public Set<String> getActiveUsers() {
+    return activeUsers;
+  }
 
-    public void addUser(final String username) {
-        activeUsers.add(username);
-        broadcastActiveUsers();
-    }
+  public void addUser(final String username) {
+    activeUsers.add(username);
+    broadcastActiveUsers();
+  }
 
-    public void removeUser(final String username) {
-        activeUsers.remove(username);
-        broadcastActiveUsers();
-    }
+  public void removeUser(final String username) {
+    activeUsers.remove(username);
+    broadcastActiveUsers();
+  }
 
-    private void broadcastActiveUsers() {
-        messagingTemplate.convertAndSend("/topic/userlist", new HashSet<>(activeUsers));
-    }
-
+  private void broadcastActiveUsers() {
+    messagingTemplate.convertAndSend("/topic/userlist", new HashSet<>(activeUsers));
+  }
 }

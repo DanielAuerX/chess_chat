@@ -15,16 +15,15 @@ import java.util.List;
 @RequestMapping("/api")
 public class MessageService {
 
-    private final MessageRepository messageRepository;
-    private static final Logger log = LoggerFactory.getLogger(MessageService.class);
+  private final MessageRepository messageRepository;
+  private static final Logger log = LoggerFactory.getLogger(MessageService.class);
 
-    public MessageService(MessageRepository messageRepository){
-        this.messageRepository = messageRepository;
-    }
+  public MessageService(MessageRepository messageRepository) {
+    this.messageRepository = messageRepository;
+  }
 
-    @GetMapping("/messages")
-    public List<ChatMessage> getMessagesBySender(@RequestParam String name){
-        return messageRepository.findMessagesBySender(name);
-    }
-
+  @GetMapping("/messages")
+  public List<ChatMessage> getMessagesBySender(@RequestParam String name) {
+    return messageRepository.findMessagesBySender(name);
+  }
 }

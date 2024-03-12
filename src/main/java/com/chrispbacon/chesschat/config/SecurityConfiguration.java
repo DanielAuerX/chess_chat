@@ -22,48 +22,64 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-	private final JwtAuthenticationFilter jwtAuthFilter;
-	private final AuthenticationProvider authenticationProvider;
-	private final LogoutHandler logoutHandler;
+  private final JwtAuthenticationFilter jwtAuthFilter;
+  private final AuthenticationProvider authenticationProvider;
+  private final LogoutHandler logoutHandler;
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http
-				.csrf((csrf) -> csrf.disable())
-				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers("/login").permitAll()
-						.requestMatchers("login.html").permitAll()
-						.requestMatchers("/register").permitAll()
-						.requestMatchers("register.html").permitAll()
-						.requestMatchers("/home").authenticated()
-						.requestMatchers("index.html").authenticated()
-						.requestMatchers("/actuator/**").permitAll()
-						.requestMatchers("/api/**").permitAll()
-						.requestMatchers("/css/**").permitAll()
-						.requestMatchers("/js/**").permitAll()
-						.requestMatchers("stylesheet.css").permitAll()
-						.anyRequest().authenticated()
-				)
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.csrf((csrf) -> csrf.disable())
+        .authorizeHttpRequests(
+            authorize ->
+                authorize
+                    .requestMatchers("/login")
+                    .permitAll()
+                    .requestMatchers("login.html")
+                    .permitAll()
+                    .requestMatchers("/register")
+                    .permitAll()
+                    .requestMatchers("register.html")
+                    .permitAll()
+                    .requestMatchers("/home")
+                    .authenticated()
+                    .requestMatchers("index.html")
+                    .authenticated()
+                    .requestMatchers("/actuator/**")
+                    .permitAll()
+                    .requestMatchers("/api/**")
+                    .permitAll()
+                    .requestMatchers("/css/**")
+                    .permitAll()
+                    .requestMatchers("/js/**")
+                    .permitAll()
+                    .requestMatchers("stylesheet.css")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
+        .rememberMe(Customizer.withDefaults())
+        .sessionManagement(
+            sessionManagement ->
+                sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authenticationProvider(authenticationProvider)
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+        .logout(
+            (logout) ->
+                logout
+                    .deleteCookies("remove")
+                    .logoutUrl("/api/chrispbacon/auth/logout")
+                    .addLogoutHandler(logoutHandler)
+                    .logoutSuccessHandler(
+                        (request, response, authentication) ->
+                            SecurityContextHolder.clearContext()));
 
-				.rememberMe(Customizer.withDefaults())
-				.sessionManagement(sessionManagement -> sessionManagement
-						.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				)
-				.authenticationProvider(authenticationProvider)
-				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-				.logout((logout) ->
-						logout.deleteCookies("remove")
-								.logoutUrl("/api/chrispbacon/auth/logout")
-								.addLogoutHandler(logoutHandler)
-								.logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext()));
+    return http.build();
+  }
 
-		return http.build();
-	}
-
-	@Bean
-	WebSecurityCustomizer webSecurityCustomizer() {
-		return web -> web.ignoring()
-				.requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
-				.requestMatchers(new AntPathRequestMatcher("/auth/**"));
-	}
+  @Bean
+  WebSecurityCustomizer webSecurityCustomizer() {
+    return web ->
+        web.ignoring()
+            .requestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+            .requestMatchers(new AntPathRequestMatcher("/auth/**"));
+  }
 }

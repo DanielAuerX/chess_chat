@@ -9,29 +9,28 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class PageController {
 
-    private static final Logger log = LoggerFactory.getLogger(PageController.class);
+  private static final Logger log = LoggerFactory.getLogger(PageController.class);
 
-    @GetMapping("/home")
-    public ModelAndView welcome() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index.html");
-        return modelAndView;
-    }
+  @GetMapping("/home")
+  public ModelAndView welcome() {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("index.html");
+    return modelAndView;
+  }
 
-    @GetMapping("/login")
-    public ModelAndView login() {
-        log.info("test");
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login.html");
-        log.info(modelAndView.getViewName());
-        return modelAndView;
-    }
+  @GetMapping("/login")
+  public ModelAndView login() {
+    log.info("test");
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("login.html");
+    log.info(modelAndView.getViewName());
+    return modelAndView;
+  }
 
-    @GetMapping("/register")
-    public ModelAndView register() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("register.html");
-        return modelAndView;
-    }
-
+  @GetMapping("/register")
+  public ModelAndView register() {
+    ModelAndView modelAndView = new ModelAndView();
+    modelAndView.setViewName("register.html");
+    return modelAndView;
+  }
 }
