@@ -1,17 +1,29 @@
 package com.chrispbacon.chesschat.chat;
 
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Entity
 public class ChatMessage {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID messageId;
     private String content;
     private String sender;
     private MessageType type;
+
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime timestamp;
+
+    public ChatMessage() {
+    }
 
     public ChatMessage(String content, String sender, MessageType type) {
         this.content = content;
         this.sender = sender;
         this.type = type;
-    }
-
-    public ChatMessage() {
     }
 
     public static ChatMessageBuilder builder() {
@@ -28,6 +40,14 @@ public class ChatMessage {
 
     public MessageType getType() {
         return this.type;
+    }
+
+    public UUID getMessageId() {
+        return messageId;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
     public static class ChatMessageBuilder {

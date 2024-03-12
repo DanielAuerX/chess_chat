@@ -1,8 +1,10 @@
 package com.chrispbacon.chesschat.chat;
 
 import com.chrispbacon.chesschat.lichess.LichessService;
+import com.chrispbacon.chesschat.repository.MessageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequestMapping("/home")
 public class ChatController {
@@ -18,15 +22,20 @@ public class ChatController {
     private static final Logger log = LoggerFactory.getLogger(ChatController.class);
     private final LichessService lichessService;
     private final ActiveUserService activeUserService;
+    private final MessageRepository messageRepository;
 
-    public ChatController(LichessService lichessService, ActiveUserService activeUserService) {
+
+    public ChatController(LichessService lichessService, ActiveUserService activeUserService, MessageRepository messageRepository) {
         this.lichessService = lichessService;
         this.activeUserService = activeUserService;
+        this.messageRepository = messageRepository;
     }
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+        chatMessage.setTimestamp(LocalDateTime.now());
+        messageRepository.save(chatMessage);
         if (lichessService.shouldDisplayStats(chatMessage)){
             log.info("stats have been requested by {}", chatMessage.getSender());
             return lichessService.requestStats(chatMessage);

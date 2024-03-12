@@ -37,6 +37,7 @@ public class SecurityConfiguration {
 						.requestMatchers("register.html").permitAll()
 						.requestMatchers("/home").authenticated()
 						.requestMatchers("index.html").authenticated()
+						.requestMatchers("/actuator/**").permitAll()
 						.requestMatchers("/css/**").permitAll()
 						.requestMatchers("/js/**").permitAll()
 						.requestMatchers("stylesheet.css").permitAll()
