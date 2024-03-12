@@ -30,7 +30,7 @@ jobs:
     #    args: --disable all,!google-java-format
 
     - name: verifying java format
-      run: ./gradlew spotlessApply
+      run: ./gradlew spotlessCheck
 
     - name: build with gradle
       run: |
