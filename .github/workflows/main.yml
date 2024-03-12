@@ -30,6 +30,8 @@ jobs:
 
     - name: check Java code format
       uses: super-linter/super-linter@v6.3.0
+      with:
+        args: --disable all,!google-java-format
 
     - name: build with gradle
       run: |
