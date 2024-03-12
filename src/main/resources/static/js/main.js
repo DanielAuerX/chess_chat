@@ -48,10 +48,9 @@ function onConnected() {
     )
 
     connectingElement.classList.add('hidden');
-
-    // toggle user list panel visibility
-    var userListPanel = document.getElementById('userListPanel');
-    userListPanel.classList.remove('hidden');
+        // toggle user list panel visibility
+        var userListPanel = document.getElementById('userListPanel');
+        userListPanel.classList.remove('hidden');
 }
 
 function onError(error) {
