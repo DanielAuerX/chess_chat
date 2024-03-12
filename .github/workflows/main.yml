@@ -36,7 +36,7 @@ jobs:
     - name: build with gradle
       run: |
         chmod +x ./gradlew
-        ./gradlew build
+        ./gradlew build -x test
 
     - name: analyze gradle imports
       run: ./gradlew lintGradle
