@@ -1,6 +1,28 @@
-init readme
 
+# Chesschat: A Real-Time Chat Application
 
-Java Code Format
+Chesschat is a web application that enables real-time chat functionality. It allows users to connect and communicate seamlessly, making it ideal for various online interactions.
 
-[![Super-Linter](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/<WORKFLOW_FILE_NAME>/badge.svg)](https://github.com/marketplace/actions/super-linter)
+## Features
+
+* **Display LiChess stats:** $stats USERNAME
+* **Challenge a player on LiChess:** $challenge USERNAME
+
+## Local development
+
+### Prerequisites
+
+* Java 17
+* Gradle
+* Docker
+
+#### Apply Java Code Format
+
+```bash
+./gradlew spotlessApply
+```
+
+#### Run Docker container like this
+```bash
+docker run -p 8080:8080 dauer23/chesschat:latest
+``` 

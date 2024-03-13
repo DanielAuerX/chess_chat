@@ -1,0 +1,17 @@
+.mvn/
+.gradle/
+out/
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+*.class
+HELP.md
+README.md
+
+
+*.log
+*.swp
+
+src/test/
