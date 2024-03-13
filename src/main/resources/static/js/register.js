@@ -36,6 +36,7 @@ form.addEventListener('submit', function (e) {
         localStorage.setItem('refresh_token', data.refresh_token);
         localStorage.setItem('userName', data.user.userName);
         document.cookie = `Authorization=${data.access_token}`
+        window.location.href = 'http://localhost:8080/home';
       });
     } else {
       alert("Something went wrong!");
