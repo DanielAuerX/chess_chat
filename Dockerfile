@@ -1,8 +1,10 @@
 FROM amazoncorretto:17-alpine
 
-WORKDIR /app
+RUN mkdir /app
 
-COPY build/libs/chesschat-0.0.1-SNAPSHOT.jar app.jar
+COPY app.jar /app/app.jar
+
+WORKDIR /app
 
 EXPOSE 8080
 
