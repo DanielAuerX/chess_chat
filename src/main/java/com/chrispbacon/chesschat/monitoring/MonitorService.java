@@ -1,6 +1,5 @@
 package com.chrispbacon.chesschat.monitoring;
 
-import com.chrispbacon.chesschat.chat.ChatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

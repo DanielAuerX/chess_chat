@@ -3,12 +3,11 @@ package com.chrispbacon.chesschat.chat;
 import com.chrispbacon.chesschat.lichess.LichessService;
 import com.chrispbacon.chesschat.monitoring.MonitorService;
 import com.chrispbacon.chesschat.repository.MessageRepository;
+import java.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
 
 @Component
 public class ChatService {
