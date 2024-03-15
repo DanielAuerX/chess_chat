@@ -10,12 +10,12 @@
     <h2>Sorry! Your browser doesn't support Javascript</h2>
 </noscript>
 
-<div id="username-page">
+<div id="username-page" class="hidden">
     <div class="username-page-container">
         <h1 class="title">Type your username to enter the Chatroom</h1>
         <form id="usernameForm" name="usernameForm">
             <div class="form-group">
-                <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control"/>
+                <input type="text" id="name" placeholder="Username" autocomplete="off" class="form-control">
             </div>
             <div class="form-group">
                 <button type="submit" class="accent username-submit">Start Chatting</button>
@@ -25,28 +25,44 @@
 </div>
 
 <!-- User List -->
-<div id="userListPanel" class="user-list-panel hidden">
-    <h3>Active Users</h3>
-    <ul id="userList"></ul>
-</div>
+
 
 <!-- Chat -->
-<div id="chat-page" class="hidden">
-    <div class="chat-container">
-        <div class="chat-header">
-            <h2>Chess Chat</h2>
+<div id="chat-page" class="">
+    <div id="userListPanel" class="user-list-panel">
+        <h3>Active Users</h3>
+        <ul id="userList"><li>jan</li></ul>
+    </div><div class="chat-container">
+    <div class="chat-header">
+        <h2>Chess Chat</h2>
+    </div>
+    <div class="connecting hidden">
+        Connecting...
+    </div>
+    <ul id="messageArea">
+
+    </ul>
+    <form id="messageForm" name="messageForm">
+        <div class="form-group">
+            <div class="input-group clearfix">
+                <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control">
+                <button type="submit" class="primary">Send</button>
+            </div>
         </div>
-        <div class="connecting">
-            Connecting...
+    </form>
+</div>
+    <div id="direct-container" class="chat-container hidden">
+        <div class="chat-header direct-header">
+            <h2 id="direct-header">Direct Message: unknown</h2>
+            <button id="direct-close">X</button>
         </div>
-        <ul id="messageArea">
+        <ul id="directMessageArea">
 
         </ul>
-        <form id="messageForm" name="messageForm">
+        <form id="directMessageForm" name="directMessageForm">
             <div class="form-group">
                 <div class="input-group clearfix">
-                    <input type="text" id="message" placeholder="Type a message..." autocomplete="off"
-                           class="form-control"/>
+                    <input type="text" id="directMessage" placeholder="Type a message..." autocomplete="off" class="form-control">
                     <button type="submit" class="primary">Send</button>
                 </div>
             </div>
@@ -57,5 +73,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script src="js/main.js"></script>
+
 </body>
 </html>
