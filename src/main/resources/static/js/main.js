@@ -41,6 +41,7 @@ function connect(event) {
 function onConnected() {
     stompClient.subscribe('/topic/public', onMessageReceived);    // subscribe to the public topic
     stompClient.subscribe('/topic/userlist', onUserListReceived); // subscribe to user list updates
+    stompClient.subscribe("/user/exchange/amq.direct/chat.message", onDirectMessageReceived)
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
@@ -62,17 +63,43 @@ function onError(error) {
 
 function sendMessage(event) {
     var messageContent = messageInput.value.trim();
-    if (messageContent && stompClient) {
-        var chatMessage = {
-            sender: username,
-            content: messageInput.value,
-            type: 'CHAT'
-        };
-        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-        messageInput.value = '';
+    if (messageContent.startsWith('$dm')) {
+        var parts = messageContent.split(' ');
+
+        if (parts.length >= 3) {
+            var recipient = parts[1];
+            var content = parts.slice(2).join(' ');
+
+            var chatMessage = {
+                sender: username,
+                recipient: recipient,
+                content: content,
+                type: 'CHAT'
+            };
+
+            if (stompClient) {
+                console.log("/chat.private." + recipient)
+                stompClient.send("/app/chat.private." + recipient, {}, JSON.stringify(chatMessage));
+                messageInput.value = '';
+            }
+        } else {
+            alert('Incorrect syntax for direct message. Please use: $dm <recipient> <message>');
+        }
+    } else {
+        if (messageContent && stompClient) {
+            var chatMessage = {
+                sender: username,
+                content: messageInput.value,
+                type: 'CHAT'
+            };
+            stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+            messageInput.value = '';
+        }
     }
+
     event.preventDefault();
 }
+
 
 function onUserListReceived(payload) {
     // handle the received user list and update ui
@@ -89,6 +116,26 @@ function onUserListReceived(payload) {
         userListElement.appendChild(userItem);
     });
 }
+
+function onDirectMessageReceived(payload) {
+    var message = JSON.parse(payload.body);
+    var messageElement = document.createElement('li');
+    messageElement.classList.add('chat-message');
+
+    var recipientElement = document.createElement('span');
+    var recipientText = document.createTextNode('From ' + message.sender + ': ');
+    recipientElement.appendChild(recipientText);
+    messageElement.appendChild(recipientElement);
+
+    var contentElement = document.createElement('span');
+    var contentText = document.createTextNode(message.content);
+    contentElement.appendChild(contentText);
+    messageElement.appendChild(contentElement);
+
+    messageArea.appendChild(messageElement);
+    messageArea.scrollTop = messageArea.scrollHeight;
+}
+
 
 
 function onMessageReceived(payload) {
