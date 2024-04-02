@@ -63,8 +63,10 @@ public class SecurityConfiguration {
                 sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-        .exceptionHandling(exceptionHandling ->
-                    exceptionHandling.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/register")))
+        .exceptionHandling(
+            exceptionHandling ->
+                exceptionHandling.authenticationEntryPoint(
+                    new LoginUrlAuthenticationEntryPoint("/register")))
         .logout(
             (logout) ->
                 logout
