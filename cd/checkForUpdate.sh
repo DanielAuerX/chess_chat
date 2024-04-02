@@ -11,7 +11,7 @@ fi
 
 #get local docker image date
 currentDate=$(docker inspect --format='{{json .Created}}' $image_full_name | awk -F'[.+]' '{print substr($1, 2, 17) "59.9999Z"}')
-    echo "Date of creation of the local docker image: $currentDate"
+    echo "Local Docker image (date of creation): $currentDate"
 
 response=$(curl -m 10 -s -X GET "https://hub.docker.com/v2/repositories/$host/$image_name/tags/$tag")
 
@@ -22,7 +22,7 @@ fi
 
 if echo "$response" | grep -q '"last_updated"'; then
     remoteImageTimestamp=$(echo "$response" | grep -oP '"last_updated":"\K[^",]+')
-    echo "Last update of the remote docker image: $remoteImageTimestamp"
+    echo "Remote Docker image (last update): $remoteImageTimestamp"
 else
     echo "Error: Unable to retrieve image information from Docker Hub."
     exit 1
@@ -54,5 +54,5 @@ if [ $? -eq 100 ]; then
     fi
     echo "Thank you for using the script. Bye."
 else
-    echo "The local image is up to date. Stay frosty and off the pork. Pigs are your friends <3."
+    echo "The local image is up to date. Stay frosty <3."
 fi
