@@ -42,9 +42,6 @@ if [ $? -eq 100 ]; then
         docker run -d --name $image_name -p 8080:8080 $image_full_name
     elif docker ps -a --format '{{.Names}}' | grep -q "$image_name"; then
         echo "Container $image_name exists, but not running..."
-        echo "Stopping..."
-        docker stop $image_name
-        sleep 2
         docker rm $image_name
         echo "Starting..."
         docker run -d --name $image_name -p 8080:8080 $image_full_name
