@@ -41,6 +41,19 @@ public class ChatService {
         log.info("a challenge has been requested by {}", chatMessage.getSender());
         return lichessService.challenge(chatMessage);
       }
+      if (chatMessage.getContent().startsWith("$help")) {
+        log.info("a help command has been issued by {}", chatMessage.getSender());
+        return new ChatMessage(
+            "Available commands: $help, $dm <user> <recipient>, $challenge <user>, $stats <user>",
+            "Chatroom Bot",
+            MessageType.CHAT);
+      }
+      if (chatMessage.getContent().startsWith("$")) {
+        log.info("unrecognized command: {}", chatMessage.getContent());
+        return new ChatMessage(
+            "unrecognized command: " + chatMessage.getContent(), "Chatroom Bot", MessageType.CHAT);
+      }
+
       return chatMessage;
     } catch (Exception e) {
       if (!monitorService.sendAlert(e)) {
