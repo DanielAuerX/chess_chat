@@ -328,3 +328,11 @@ button.accent {
     overflow: auto;
     max-height: 200px;
 }
+
+.logout {
+    position: absolute;
+    bottom: 0;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    z-index: 1000;
+}

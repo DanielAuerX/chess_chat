@@ -20,10 +20,8 @@ public class PageController {
 
   @GetMapping("/login")
   public ModelAndView login() {
-    log.info("test");
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("login.html");
-    log.info(modelAndView.getViewName());
     return modelAndView;
   }
 
