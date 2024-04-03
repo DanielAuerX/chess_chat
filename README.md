@@ -7,6 +7,7 @@ Chesschat is a web application that enables real-time chat functionality. It all
 
 * **Display LiChess stats:** $stats USERNAME
 * **Challenge a player on LiChess:** $challenge USERNAME
+* **Private message:** $pm USERNAME MESSAGE
 
 ## Local development
 
@@ -24,5 +25,5 @@ Chesschat is a web application that enables real-time chat functionality. It all
 
 #### Run Docker container like this
 ```bash
-docker run -p 8080:8080 dauer23/chesschat:latest
+docker run -p 8080:8080 dauer23/chess-chat:latest
 ``` 
