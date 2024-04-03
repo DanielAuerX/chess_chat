@@ -19,7 +19,6 @@ public class ChatController {
   private final SimpMessagingTemplate simpMessagingTemplate;
   private static final Logger log = LoggerFactory.getLogger(ChatController.class);
 
-
   public ChatController(ChatService chatService, SimpMessagingTemplate simpMessagingTemplate) {
     this.chatService = chatService;
     this.simpMessagingTemplate = simpMessagingTemplate;
@@ -39,10 +38,11 @@ public class ChatController {
   }
 
   @MessageMapping("/chat.private.{username}")
-  public void filterPrivateMessage(@Payload DirectMessageRequest message, @DestinationVariable("username") String username) {
+  public void filterPrivateMessage(
+      @Payload DirectMessageRequest message, @DestinationVariable("username") String username) {
     log.info("Sending priv message to: " + username);
     message.setType(MessageType.CHAT);
-    simpMessagingTemplate.convertAndSend("/user/" + username + "/exchange/amq.direct/chat.message", message);
+    simpMessagingTemplate.convertAndSend(
+        "/user/" + username + "/exchange/amq.direct/chat.message", message);
   }
-
 }
