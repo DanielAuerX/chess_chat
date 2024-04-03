@@ -13,7 +13,7 @@ var directMessageArea = document.querySelector('#directMessageArea');
 var directMessageInput = document.querySelector('#directMessage');
 var connectingElement = document.querySelector('.connecting');
 var directClose = document.getElementById('direct-close');
-
+const logoutElement = document.getElementById("logout");
 var stompClient = null;
 var username = null;
 
@@ -316,3 +316,11 @@ window.onload = () => {
         stompClient.connect({}, onConnected, onError);
     }
 }
+
+function logout() {
+    localStorage.clear();
+    document.cookie = "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = "/login";
+}
+
+document.getElementById("logout").addEventListener("click", logout);
