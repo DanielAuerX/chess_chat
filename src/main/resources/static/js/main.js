@@ -82,6 +82,37 @@ function sendMessage(event) {
                 type: 'CHAT'
             };
 
+            var messageElement = document.createElement('li');
+
+            messageElement.classList.add('chat-message');
+
+            var avatarElement = document.createElement('i');
+            var avatarText = document.createTextNode(chatMessage.sender[0]);
+            avatarElement.appendChild(avatarText);
+            avatarElement.style['background-color'] = getAvatarColor(chatMessage.sender);
+
+            messageElement.appendChild(avatarElement);
+
+            var usernameElement = document.createElement('span');
+            var usernameText = document.createTextNode(chatMessage.sender);
+            usernameElement.appendChild(usernameText);
+            messageElement.appendChild(usernameElement);
+
+            var textElement = document.createElement('div');
+            textElement.style.whiteSpace = 'pre-line'; // or 'pre'
+            var messageText = document.createTextNode(chatMessage.content);
+
+            textElement.appendChild(messageText);
+            messageElement.appendChild(textElement);
+
+            if (directContainer.classList.contains('hidden')) {
+                directContainer.classList.remove('hidden');
+                directHeader.innerHTML = `Direct Message: ${chatMessage.recipient}`
+            }
+
+            directMessageArea.appendChild(messageElement);
+            directMessageArea.scrollTop = directMessageArea.scrollHeight;
+
             if (stompClient) {
                 console.log("/chat.private." + recipient)
                 stompClient.send("/app/chat.private." + recipient, {}, JSON.stringify(chatMessage));
@@ -115,6 +146,37 @@ function sendPrivateMessage(event) {
         content: content,
         type: 'CHAT'
     };
+
+    var messageElement = document.createElement('li');
+
+    messageElement.classList.add('chat-message');
+
+    var avatarElement = document.createElement('i');
+    var avatarText = document.createTextNode(chatMessage.sender[0]);
+    avatarElement.appendChild(avatarText);
+    avatarElement.style['background-color'] = getAvatarColor(chatMessage.sender);
+
+    messageElement.appendChild(avatarElement);
+
+    var usernameElement = document.createElement('span');
+    var usernameText = document.createTextNode(chatMessage.sender);
+    usernameElement.appendChild(usernameText);
+    messageElement.appendChild(usernameElement);
+
+    var textElement = document.createElement('div');
+    textElement.style.whiteSpace = 'pre-line'; // or 'pre'
+    var messageText = document.createTextNode(chatMessage.content);
+
+    textElement.appendChild(messageText);
+    messageElement.appendChild(textElement);
+
+    if (directContainer.classList.contains('hidden')) {
+        directContainer.classList.remove('hidden');
+        directHeader.innerHTML = `Direct Message: ${message.sender}`
+    }
+
+    directMessageArea.appendChild(messageElement);
+    directMessageArea.scrollTop = directMessageArea.scrollHeight;
 
     if (stompClient) {
         console.log("/chat.private." + recipient)
