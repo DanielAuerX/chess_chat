@@ -13,7 +13,6 @@ var directMessageArea = document.querySelector('#directMessageArea');
 var directMessageInput = document.querySelector('#directMessage');
 var connectingElement = document.querySelector('.connecting');
 var directClose = document.getElementById('direct-close');
-const logoutElement = document.getElementById("logout");
 
 var stompClient = null;
 var username = null;
@@ -228,13 +227,16 @@ function onDirectMessageReceived(payload) {
     textElement.style.whiteSpace = 'pre-line'; // or 'pre'
     var messageText = document.createTextNode(message.content);
 
-    var contentElement = document.createElement('span');
-    var contentText = document.createTextNode(message.content);
-    contentElement.appendChild(contentText);
-    messageElement.appendChild(contentElement);
+    textElement.appendChild(messageText);
+    messageElement.appendChild(textElement);
 
-    messageArea.appendChild(messageElement);
-    messageArea.scrollTop = messageArea.scrollHeight;
+    if (directContainer.classList.contains('hidden')) {
+        directContainer.classList.remove('hidden');
+        directHeader.innerHTML = `Direct Message: ${message.sender}`
+    }
+
+    directMessageArea.appendChild(messageElement);
+    directMessageArea.scrollTop = directMessageArea.scrollHeight;
 }
 
 
@@ -314,11 +316,3 @@ window.onload = () => {
         stompClient.connect({}, onConnected, onError);
     }
 }
-
-function logout() {
-    localStorage.clear();
-    document.cookie = "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    window.location.href = "/login";
-}
-
-document.getElementById("logout").addEventListener("click", logout);
